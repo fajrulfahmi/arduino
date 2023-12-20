@@ -2,7 +2,7 @@
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-#define button 3
+#define button 2
 #define trig 8
 #define echo 9
 #define maksimal 200
@@ -23,7 +23,13 @@ void loop() {
   if (buttonValue == 0) {
     Serial.println("Button Ditekan");
     lcd.setCursor(0, 0);
-    lcd.print("Jarak : " + (String)ultraValue + " cm");
+
+    if(ultraValue == 0){
+      lcd.print("  Out Of Range  ");
+    }else {
+      lcd.print("Jarak : " + (String)ultraValue + " cm");
+    }
+
     delay(1000);
     lcd.clear();
   }else{
